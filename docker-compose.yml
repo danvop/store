@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  nginx:
+    build:
+      context: ./_docker/nginx
+      dockerfile: nginx.dockerfile
+    environment:
+      - VIRTUAL_HOST=app-two.test
+      - LETSENCRYPT_HOST=app-two.test
+    # ports:
+    #   - 80:80
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+    #   - mysql
+      - php
+  php:
+
+    build:
+      context: ./_docker/php
+      dockerfile: php.dockerfile
+
+    volumes:
+      - ./:/var/www/html
+  composer:
+    build:
+      context: ./_docker/composer
+      dockerfile: composer.dockerfile
+
+    volumes:
+       - ./src:/var/www/html
+    working_dir: /var/www/html
+  npm:
+    image: node:current-alpine
+    volumes:
+      - ./:/var/www/html
+    entrypoint: ["npm"]
+    working_dir: /var/www/html
+
+  artisan:
+    build:
+      context: ./_docker/php
+      dockerfile: php.dockerfile
+
+    volumes:
+      - ./:/var/www/html
+    # depends_on:
+    #   - mysql
+    entrypoint: ["php", "/var/www/html/artisan"]
+
+networks:
+  default:
+    name: local
