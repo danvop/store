@@ -49,6 +49,15 @@ services:
     #   - mysql
     entrypoint: ["php", "/var/www/html/artisan"]
 
+  node_run:
+    image: node:current-alpine
+    depends_on:
+      - nginx
+    volumes:
+      - ./:/var/www/html
+    command: ["npm", "install", "dev", "&&","npm", "run", "dev"]
+    working_dir: /var/www/html
+
 networks:
   default:
     name: local
