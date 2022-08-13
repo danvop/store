@@ -10,6 +10,7 @@ RUN sed -i "s/group = www-data/group = ${PHPGROUP}/g" /usr/local/etc/php-fpm.d/w
 
 RUN mkdir -p /var/www/html/public
 
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql bcmath
+# RUN docker-php-ext-install bcmath
 
 CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
