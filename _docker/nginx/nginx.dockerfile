@@ -1,8 +1,8 @@
 # FROM nginx
 FROM nginx:stable-alpine
 
-ENV NGINXUSER=laravell
-ENV NGINXGROUP=laravel
+ENV NGINXUSER=danvop
+ENV NGINXGROUP=danvop
 
 RUN mkdir -p /var/www/html/public
 

@@ -6,8 +6,8 @@ services:
       context: ./_docker/nginx
       dockerfile: nginx.dockerfile
     environment:
-      - VIRTUAL_HOST=app-two.test
-      - LETSENCRYPT_HOST=app-two.test
+      - VIRTUAL_HOST=store.test
+      - LETSENCRYPT_HOST=store.test
     # ports:
     #   - 80:80
     volumes:
