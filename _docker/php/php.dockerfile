@@ -1,8 +1,8 @@
-FROM php:fpm-alpine3.15
+FROM php:fpm-alpine
 # FROM php:8-fpm-alpine
 
-ENV PHPGROUP=danvop
-ENV PHPUSER=danvop
+# ENV PHPGROUP=danvop
+# ENV PHPUSER=danvop
 
 RUN adduser -g ${PHPGROUP} -s /bin/sh -D ${PHPUSER}
 

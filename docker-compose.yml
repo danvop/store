@@ -16,7 +16,6 @@ services:
     #   - mysql
       - php
   php:
-
     build:
       context: ./_docker/php
       dockerfile: php.dockerfile

@@ -1,8 +1,8 @@
 # FROM nginx
 FROM nginx:stable-alpine
 
-ENV NGINXUSER=danvop
-ENV NGINXGROUP=danvop
+# ENV NGINXUSER=danvop
+# ENV NGINXGROUP=danvop
 
 RUN mkdir -p /var/www/html/public
 
