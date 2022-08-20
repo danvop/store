@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\QrCodeController;
-
+use Faker\Generator as Faker;
 use Illuminate\Container\Container;
 
 // with middleware auth
@@ -22,14 +22,8 @@ use Illuminate\Container\Container;
 
 // require __DIR__.'/auth.php';
 Route::get('/faker', function () {
-    $faker = Faker\Factory::create();
-    echo $faker->paragraph();
-    echo $faker->email();
-    // ddd($faker->image(storage_path('photos'),320,240,null,false));
-    // echo "<img src='";
-    // ddd(echo $faker->image(null,640, 480, 'animals', true));
-    // echo "'/>";
-    echo ddd($faker->imageUrl(360, 360, 'animals', true));
+
+
     return "end";
 });
 

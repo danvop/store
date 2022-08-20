@@ -31,7 +31,7 @@ class PhotoFactory extends Factory
             //thumblail_path
             // 'path' => $path = $this->faker->image('public/img', 640,480,null,false)
             'name' => $name = $this->faker->sentence(2),
-            'path' => $this->faker->imageUrl(public_path('photos'), 640,480,null,false),
+            'path' => $this->faker->image(public_path('photos'), 640,480,null,false),
             'item_id' => 2,
             'thumbnail_path' => $this->faker->image(storage_path('photos'),320,240,null,false)
         ];
