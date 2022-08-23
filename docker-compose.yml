@@ -2,6 +2,8 @@ version: '3.9'
 
 services:
   nginx:
+    # env_file:
+    #   - .env
     build:
       context: ./_docker/nginx
       dockerfile: nginx.dockerfile
@@ -16,6 +18,7 @@ services:
     #   - mysql
       - php
   php:
+
     build:
       context: ./_docker/php
       dockerfile: php.dockerfile
@@ -38,6 +41,11 @@ services:
     working_dir: /var/www/html
 
   artisan:
+    env_file:
+      - .env
+    environment:
+      - PHPGROUP=danvop
+      - PHPUSER=danvop
     build:
       context: ./_docker/php
       dockerfile: php.dockerfile
