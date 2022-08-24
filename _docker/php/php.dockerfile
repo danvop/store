@@ -4,12 +4,25 @@ FROM php:fpm-alpine
 # ENV PHPGROUP=danvop
 # ENV PHPUSER=danvop
 
-RUN adduser -g ${PHPGROUP} -s /bin/sh -D ${PHPUSER}
 
-RUN sed -i "s/user = www-data/user = ${PHPUSER}/g" /usr/local/etc/php-fpm.d/www.conf
-RUN sed -i "s/group = www-data/group = ${PHPGROUP}/g" /usr/local/etc/php-fpm.d/www.conf
+ARG USERNAME=laravel
+ARG UID=1000
 
-RUN mkdir -p /var/www/html/public
+#run non root container
+RUN adduser --uid $UID $USERNAME &&
+usermod -a -G www-data,root $USERNAME
+
+USER $USERNAME
+
+EXPOSE 9000
+
+
+# RUN adduser -g ${PHPGROUP} -s /bin/sh -D ${PHPUSER}
+
+# RUN sed -i "s/user = www-data/user = ${PHPUSER}/g" /usr/local/etc/php-fpm.d/www.conf
+# RUN sed -i "s/group = www-data/group = ${PHPGROUP}/g" /usr/local/etc/php-fpm.d/www.conf
+
+# RUN mkdir -p /var/www/html/public
 
 RUN docker-php-ext-install pdo pdo_mysql bcmath
 # RUN docker-php-ext-install bcmath
