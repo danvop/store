@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\QrCodeController;
+use App\Models\Photo;
 use Faker\Generator as Faker;
 use Illuminate\Container\Container;
 
@@ -22,8 +23,12 @@ use Illuminate\Container\Container;
 
 // require __DIR__.'/auth.php';
 Route::get('/faker', function () {
+    $photo = Photo::find(92);
+    dd($photo->path);
+    // $extension = explode('/', $photo->path);
+    // dd(end($extension));
 
-
+    dd($photo->GetName());
     return "end";
 });
 
@@ -32,6 +37,7 @@ Route::get('/', [StoreController::class, 'index']);
 
 Route::get('/all', [StoreController::class, 'index']);
 Route::get('stores/{store}', [StoreController::class, 'show']);
+// Route::get('stores/{store}', [StoreController::class, 'show']);
 
 Route::get('items', [ItemController::class, 'index']);
 Route::get('/items/{item}', [ItemController::class, 'show']);

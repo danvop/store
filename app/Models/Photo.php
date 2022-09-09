@@ -13,4 +13,11 @@ class Photo extends Model
     {
         return $this->belongsTo(Item::class);
     }
+
+    public function GetName()
+    {
+        $extension = explode('/', $this->path);
+
+        return end($extension);
+    }
 }

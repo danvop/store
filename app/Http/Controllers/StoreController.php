@@ -15,6 +15,11 @@ class StoreController extends Controller
             ->get();
 
         return view('stores', compact('stores'));
+
+
+        // $stores = Store::with('items','parent')
+        // ->orderBy('parent_id')
+        // ->get();
     }
 
     // this route resolved from hashids resolveRouteBinding
