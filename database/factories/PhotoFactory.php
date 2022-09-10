@@ -21,6 +21,7 @@ class PhotoFactory extends Factory
      */
     public function definition()
     {
+        // $fakerFileName = $this->faker->image(public_path('photos'), 640,480);
         return [
             //
             //make image
@@ -31,6 +32,7 @@ class PhotoFactory extends Factory
             //thumblail_path
             // 'path' => $path = $this->faker->image('public/img', 640,480,null,false)
             'name' => $name = $this->faker->sentence(2),
+            // 'path' => basename($fakerFileName),
             'path' => $this->faker->image(public_path('photos'), 640,480),
             'item_id' => 2,
             'thumbnail_path' => $this->faker->image(public_path('photos'),320,240)
