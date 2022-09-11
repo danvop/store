@@ -1,8 +1,8 @@
 <x-layout>
     <section class="px-6 py-8">
         <main class="max-w-6xl mx-auto mt-10 space-y-6 lg:mt-20">
-            <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
-                <div class="col-span-4 mb-10 lg:text-center lg:pt-14">
+            <article class="grid max-w-4xl grid-cols-12 mx-auto gap-x-10">
+                <div class="col-span-4 mb-10 text-center">
 
                     @if (!count($item->photos))
                     <img
@@ -12,7 +12,7 @@
                     @else
                         @foreach ($item->photos as $photo)
                             <img
-                            src="/photos/{{ $photo->GetName() }}"
+                            src="/photos/{{ $photo->path }}"
                             alt=""
                             class=" rounded-xl">
                         @endforeach
@@ -34,7 +34,7 @@
 
                 <div class="col-span-8">
                     <div class="justify-between hidden mb-6 lg:flex">
-                        <a href="/stores/{{ $item->store->id }}"
+                        <a href="/stores/{{ $item->store->hashid }}"
                             class="relative inline-flex items-center text-lg transition-colors duration-300 hover:text-blue-500">
                             <svg width="22" height="22" viewBox="0 0 22 22" class="mr-2">
                                 <g fill="none" fill-rule="evenodd">

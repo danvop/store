@@ -1,16 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Models\Item;
+use App\Models\Photo;
 use App\Models\Store;
-use Illuminate\Support\Facades\Cache;
+use Faker\Generator as Faker;
 
+use Illuminate\Container\Container;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\QrCodeController;
-use App\Models\Photo;
-use Faker\Generator as Faker;
-use Illuminate\Container\Container;
 
 // with middleware auth
 // Route::get('/', function () {
@@ -62,3 +63,20 @@ Route::get('/hash', function() {
 
 Route::get('/generate-qrcode/{store}', [QrCodeController::class, 'index']);
 
+Route::get('/faker', function(){
+    $faker = \Faker\Factory::create();
+    $faker->addProvider(new \Xvladqt\Faker\LoremFlickrProvider($faker));
+    // $faker->image(public_path('photos'), $width = 640, $height = 480);
+    // echo $faker->image(public_path('photos'), $width = 640, $height = 480);
+    $path = $faker->image(public_path('photos'), 640, 480, false, false);
+
+    echo $path;
+    echo "</br>";
+    $base = basename($path);
+    echo $base;
+    echo "</br>";
+    echo '<img src="';
+    echo 'photos/'.$base;
+    echo '">';
+
+});
