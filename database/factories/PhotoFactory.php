@@ -22,7 +22,7 @@ class PhotoFactory extends Factory
     public function definition()
     {
         $fakerImage = $this->faker->image(public_path('photos'), 720, 720, false, false);
-        $fakerThumbnail = $this->faker->image(public_path('photos'), 50, 50, false, false);
+        $fakerThumbnail = $this->faker->image(public_path('thumbnails'), 50, 50, false, false);
         return [
             //
             //make image

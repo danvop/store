@@ -70,13 +70,32 @@ Route::get('/faker', function(){
     // echo $faker->image(public_path('photos'), $width = 640, $height = 480);
     $path = $faker->image(public_path('photos'), 640, 480, false, false);
 
+
+    // echo $path;
+    // echo "</br>";
+    // $base = basename($path);
+    // echo $base;
+    // echo "</br>";
+    // echo '<img src="';
+    // echo 'photos/'.$base;
+    // echo '">';
+
     echo $path;
     echo "</br>";
-    $base = basename($path);
-    echo $base;
+    // $base = basename($path);
+    echo $path;
     echo "</br>";
     echo '<img src="';
-    echo 'photos/'.$base;
+    echo 'photos/'.$path;
+    echo '">';
+
+    echo $path;
+    echo "</br>";
+    // $base = basename($path);
+    echo $path;
+    echo "</br>";
+    echo '<img src="';
+    echo 'thumbnails/'.$path;
     echo '">';
 
 });
