@@ -2,23 +2,15 @@
 
 @foreach ($stores as $store)
 
-    <div class="border-2 border-black rounded-xl p-1">
+    <div class="p-1 border-b-2">
 
-        <a href="/stores/{{ $store->hashid }}" class="font-bold">{{ $store->name }}</a>
+        {{-- <a href="/stores/{{ $store->hashid }}" class="font-bold">{{ $store->name }}</a> --}}
 
-        {{-- Get parents section --}}
-
-        <div>
-            @if($store->parents->count())
-
-            @endif
-        </div>
-        {{-- Stores parents tree section --}}
         <x-store-parents :store="$store" />
 
         {{-- show items section --}}
         @if($store->items->count())
-            <div class="flex flex-wrap text-sm">
+            <div class="grid grid-cols-6 text-sm">
                 @foreach ($store->items as $item)
                     <x-item-card-in-store :item="$item" />
                 @endforeach

@@ -1,13 +1,17 @@
 @props(['store', 'storeFullPath'])
 
-<div class="border-2 border-black rounded-xl p-1 m-1">
-    <a href="/stores/{{ $store->hashid }}" class="font-bold">{{ $store->name }}</a>
+<div class="
+            {{-- p-1 border-b-2 --}}
+            ">
+
 
     {{-- Stores parents tree section --}}
     <x-store-parents :store="$store" />
 
+
+
     @if($store->items->count())
-        <div class="flex flex-wrap text-sm">
+        <div class="grid grid-cols-6 text-sm">
             @foreach ($store->items as $item)
                 <x-item-card-in-store :item="$item" />
             @endforeach
