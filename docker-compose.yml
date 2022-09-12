@@ -2,68 +2,45 @@ version: '3.9'
 
 services:
   nginx:
-    # env_file:
-    #   - .env
     build:
       context: ./_docker/nginx
       dockerfile: nginx.dockerfile
     environment:
       - VIRTUAL_HOST=store.test
       - LETSENCRYPT_HOST=store.test
+    restart: unless-stopped
+
     # ports:
     #   - 80:80
     volumes:
       - ./:/var/www/html
     depends_on:
-    #   - mysql
       - php
+
   php:
-
     build:
+      args:
+        user: danvop
+        uid: 1000
       context: ./_docker/php
       dockerfile: php.dockerfile
 
-    volumes:
-      - ./:/var/www/html
-  composer:
-    build:
-      context: ./_docker/composer
-      dockerfile: composer.dockerfile
-
-    volumes:
-       - ./src:/var/www/html
+    # container_name: travellist-app
+    restart: unless-stopped
     working_dir: /var/www/html
-  npm:
-    image: node:current-alpine
     volumes:
       - ./:/var/www/html
-    entrypoint: ["npm"]
-    working_dir: /var/www/html
 
-  artisan:
-    env_file:
-      - .env
-    environment:
-      - PHPGROUP=danvop
-      - PHPUSER=danvop
-    build:
-      context: ./_docker/php
-      dockerfile: php.dockerfile
 
-    volumes:
-      - ./:/var/www/html
-    # depends_on:
-    #   - mysql
-    entrypoint: ["php", "/var/www/html/artisan"]
 
-  node_run:
-    image: node:current-alpine
-    depends_on:
-      - nginx
-    volumes:
-      - ./:/var/www/html
-    command: ["npm", "install", "dev", "&&","npm", "run", "dev"]
-    working_dir: /var/www/html
+
+# #   check user privileges
+#   npm:
+#     image: node:current-alpine
+#     volumes:
+#       - ./:/var/www/html
+#     entrypoint: ["npm"]
+#     working_dir: /var/www/html
 
 networks:
   default:

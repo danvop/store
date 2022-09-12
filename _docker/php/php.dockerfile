@@ -1,33 +1,34 @@
-FROM php:fpm-alpine
-# FROM php:8-fpm-alpine
+FROM php:fpm
 
-# ENV PHPGROUP=danvop
-# ENV PHPUSER=danvop
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
 
-ARG USERNAME=laravel
-ARG UID=1000
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-#run non root container
-# RUN adduser --uid ${UID} ${USERNAME} && usermod -a -G www-data,root ${USERNAME}
-RUN adduser --disabled-password -u $UID $USERNAME && usermod -a -G www-data,root $USERNAME
-    # usermod -a -G www-data,root $USERNAME && \
-    # chmod 775 /run/php
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-USER ${USERNAME}
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
 
-EXPOSE 9000
+# Set working directory
+WORKDIR /var/www/html
 
-
-# RUN adduser -g ${PHPGROUP} -s /bin/sh -D ${PHPUSER}
-
-# RUN sed -i "s/user = www-data/user = ${PHPUSER}/g" /usr/local/etc/php-fpm.d/www.conf
-# RUN sed -i "s/group = www-data/group = ${PHPGROUP}/g" /usr/local/etc/php-fpm.d/www.conf
-
-# RUN mkdir -p /var/www/html/public
-
-RUN docker-php-ext-install pdo pdo_mysql bcmath gd
-# RUN docker-php-ext-install bcmath
-
-CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
+USER $user
