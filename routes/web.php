@@ -99,3 +99,8 @@ Route::get('/faker', function(){
     echo '">';
 
 });
+
+Route::get('/image', function(){
+    $img = Image::make('foo.jpg')->resize(300, 200);
+    return $img->response('jpg');
+});

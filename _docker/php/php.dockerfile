@@ -9,10 +9,13 @@ ARG USERNAME=laravel
 ARG UID=1000
 
 #run non root container
-RUN adduser --uid $UID $USERNAME &&
-usermod -a -G www-data,root $USERNAME
+# RUN adduser --uid ${UID} ${USERNAME} && usermod -a -G www-data,root ${USERNAME}
+RUN adduser --disabled-password -u $UID $USERNAME && usermod -a -G www-data,root $USERNAME
+    # usermod -a -G www-data,root $USERNAME && \
+    # chmod 775 /run/php
 
-USER $USERNAME
+
+USER ${USERNAME}
 
 EXPOSE 9000
 
@@ -24,7 +27,7 @@ EXPOSE 9000
 
 # RUN mkdir -p /var/www/html/public
 
-RUN docker-php-ext-install pdo pdo_mysql bcmath
+RUN docker-php-ext-install pdo pdo_mysql bcmath gd
 # RUN docker-php-ext-install bcmath
 
 CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
