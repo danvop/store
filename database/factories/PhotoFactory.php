@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Photo;
+use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PhotoFactory extends Factory
@@ -21,8 +22,16 @@ class PhotoFactory extends Factory
      */
     public function definition()
     {
+        // images store in folder public/photos
+        // thumbnails store in folder public/thumbnails
+        // with the same name
+
         $fakerImage = $this->faker->image(public_path('photos'), 720, 720, false, false);
-        $fakerThumbnail = $this->faker->image(public_path('thumbnails'), 50, 50, false, false);
+
+        $img = Image::make(public_path('photos/').$fakerImage)->resize(50,50);
+
+        $img->save(public_path('thumbnails/').$fakerImage);
+
         return [
             //
             //make image
@@ -37,7 +46,7 @@ class PhotoFactory extends Factory
             // 'path' => basename($fakerImage),
             'path' => $fakerImage,
             'item_id' => 2,
-            'thumbnail_path' => $fakerThumbnail
+            'thumbnail_path' => $fakerImage
             // 'thumbnail_path' => basename($fakerThumbnail)
         ];
     }
