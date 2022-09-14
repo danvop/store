@@ -1,5 +1,6 @@
 <x-layout>
     <section class="px-6 py-8">
+
         <main class="max-w-6xl mx-auto mt-10 space-y-6 lg:mt-20">
             <article class="grid max-w-4xl grid-cols-12 mx-auto gap-x-10">
                 <div class="col-span-4 mb-10 text-center">
@@ -10,18 +11,7 @@
                         alt=""
                         class="rounded-xl">
                     @else
-                        @foreach ($item->photos as $photo)
-                            <img
-                            src="/photos/{{ $photo->path }}"
-                            alt=""
-                            class=" rounded-xl">
-                        @endforeach
-                        @foreach ($item->photos as $photo)
-                            <img
-                            src="/thumbnails/{{ $photo->path }}"
-                            alt=""
-                            class="rounded-xl">
-                        @endforeach
+                    <x-item-gallery :item="$item"/>
 
 
                     @endif
@@ -29,14 +19,6 @@
                         Published <time>{{ $item->created_at->diffForHumans() }}</time>
                     </p>
 
-                    {{-- item author --}}
-                    {{-- <div class="flex items-center mt-4 text-sm lg:justify-center">
-                        <img src="/images/lary-avatar.svg" alt="Lary avatar">
-                        <div class="ml-3 text-left">
-                            <h5 class="font-bold">{{ $post->author->name }}</h5>
-                            <h6>Mascot at Laracasts</h6>
-                        </div>
-                    </div> --}}
                 </div>
 
                 <div class="col-span-8">
@@ -68,6 +50,9 @@
                     <div class="space-y-4 leading-loose lg:text-lg">{{ $item->description }}</div>
                 </div>
             </article>
+
+
+
         </main>
     </section>
 </x-layout>
