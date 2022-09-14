@@ -101,6 +101,15 @@ Route::get('/faker', function(){
 });
 
 Route::get('/image', function(){
-    $img = Image::make('foo.jpg')->resize(300, 200);
-    return $img->response('jpg');
+    // $img = Image::make('images/illustration-1.png')->resize(300,300)->encode('png');
+    $img = Image::make('images/test-image.jpg')->resize(300,300);
+    // echo $img->getClientOriginalExtension();
+    // $img = Image::make('foo.jpg')->resize(300, 200);
+
+
+    $img->save(public_path('thumbnails/').'Illustration-1.png');
+    echo public_path('photos/');
+    echo public_path('/');
+    // echo Storage::put(public_path('thumbnails'),$img);
+    // return $img->response('png');
 });

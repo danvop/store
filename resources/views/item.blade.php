@@ -8,7 +8,7 @@
                     <img
                         src="/images/no-image-found-360x250.png"
                         alt=""
-                        class=" rounded-xl">
+                        class="rounded-xl">
                     @else
                         @foreach ($item->photos as $photo)
                             <img
@@ -16,6 +16,13 @@
                             alt=""
                             class=" rounded-xl">
                         @endforeach
+                        @foreach ($item->photos as $photo)
+                            <img
+                            src="/thumbnails/{{ $photo->path }}"
+                            alt=""
+                            class="rounded-xl">
+                        @endforeach
+
 
                     @endif
                     <p class="block mt-4 text-xs text-gray-400">
