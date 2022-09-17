@@ -33,4 +33,24 @@ class StoreController extends Controller
 
         return view('store', compact('store'));
     }
+
+    public function create()
+    {
+        return view('store-create');
+    }
+
+    public function store()
+    {
+        request()->validate([
+            'name'=>'required'
+        ]);
+
+        Store::create([
+            'user_id' => 1,
+            'name' => request('name'),
+            'description' => request('description')
+        ]);
+
+        return redirect('/all');
+    }
 }

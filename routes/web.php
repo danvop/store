@@ -40,6 +40,9 @@ Route::get('/all', [StoreController::class, 'index']);
 Route::get('stores/{store}', [StoreController::class, 'show']);
 // Route::get('stores/{store}', [StoreController::class, 'show']);
 
+Route::get('store/create', [StoreController::class, 'create']);
+Route::post('store/store', [StoreController::class, 'store']);
+
 Route::get('items', [ItemController::class, 'index']);
 Route::get('/items/{item}', [ItemController::class, 'show']);
 

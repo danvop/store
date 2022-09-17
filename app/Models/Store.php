@@ -18,6 +18,13 @@ class Store extends Model
     //code example
     //https://laraveldaily.com/eloquent-recursive-hasmany-relationship-with-unlimited-subcategories/
 
+    protected $fillable = [
+        'name',
+        'description',
+        'user_id'
+    ];
+
+
     public function stores()
     {
         return $this->hasMany(Store::class, 'parent_id');
