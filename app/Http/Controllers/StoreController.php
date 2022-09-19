@@ -34,23 +34,37 @@ class StoreController extends Controller
         return view('store', compact('store'));
     }
 
-    public function create()
+    public function create(Store $store = null)
     {
-        return view('store-create');
+        return view('store-create', compact('store'));
     }
 
-    public function store()
+    public function store(Store $store = null)
     {
         request()->validate([
             'name'=>'required'
         ]);
 
+        //user can't create store of another user
+        //user can add substore
+        //if user add substore, check user-id, If he isn't owner -> create by owner's ID
+
+        //user can't create store in unsorted and in archive store
+
+        // validate exclude user first and second store
+        // error exception
+        $storeid = $store->id ?? null;
+        // dd($storeid);
         Store::create([
             'user_id' => 1,
+            'parent_id' => $storeid,
             'name' => request('name'),
             'description' => request('description')
         ]);
 
+        //if substore -> redirect to parental store
+        //if not -> redirect to all stores
+        if($store) return redirect("/stores/$store->hashid");
         return redirect('/all');
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             //add constrains
             $table->foreignId('store_id');
-            $table->foreignId('user_id');
+            // $table->foreignId('user_id');
             $table->string('name');
             $table->text('description');
             $table->unsignedInteger('qty')->default(1);

@@ -1,5 +1,10 @@
 <x-layout>
-    <form action="/store/store" method="post">
+    @if($store)
+        <p>Parent name: {{$store->name}}</p>
+        <form action="/store/{{ $store->hashid }}/store" method="post">
+    @else
+        <form action="/store/store" method="post">
+    @endif
         @csrf
         <div class="mb-6">
             <label class="block mb-2 text-xs font-bold text-gray-700 uppercase"

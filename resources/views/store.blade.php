@@ -20,6 +20,10 @@
         </div>
 
 
+        <a
+        href="/store/{{$store->hashid}}/create"
+        class="p-1 bg-green-300 rounded"
+        >Add substore</a>
 
 
         {{-- child stores section --}}
@@ -27,6 +31,7 @@
             <div>
                 substores:
             </div>
+
             @php
                 $stores = $store->childrenStores
             @endphp
