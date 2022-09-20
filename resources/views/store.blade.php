@@ -20,10 +20,14 @@
         </div>
 
 
-        <a
-        href="/store/{{$store->hashid}}/create"
+        {{-- Store actions sections --}}
+        @if($store->id != $store->first()->id
+            AND $store->id != $store->skip(1)->first()->id)
+        <x-store-actions :store="$store"/>
+        @endif
+        {{-- <a href="/store/{{$store->hashid}}/create"
         class="p-1 bg-green-300 rounded"
-        >Add substore</a>
+        >Add substore</a> --}}
 
 
         {{-- child stores section --}}

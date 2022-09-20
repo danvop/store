@@ -12,6 +12,12 @@ class Item extends Model
 
     protected $with = ['photos'];
 
+    protected $fillable = [
+        'name',
+        'description',
+        'store_id'
+    ];
+
 
     public function store()
     {

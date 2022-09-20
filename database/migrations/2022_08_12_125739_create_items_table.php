@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('store_id');
             // $table->foreignId('user_id');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->unsignedInteger('qty')->default(1);
             $table->timestamps();
         });

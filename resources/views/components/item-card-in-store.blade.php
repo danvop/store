@@ -1,6 +1,6 @@
 <div class="p-1 m-1 bg-gray-100 rounded-md">
 
-    <a href="/items/{{ $item->hashid }}">
+    <a href="/item/{{ $item->hashid }}">
 
 
     @if (!count($item->photos))
@@ -16,8 +16,6 @@
     @endif
     </a>
 
-
-    {{ $item->id }}
     <a href="/items/{{ $item->hashid }}">
         {{ $item->name }}
     </a>
