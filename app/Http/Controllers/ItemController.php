@@ -43,4 +43,14 @@ class ItemController extends Controller
         if($store) return redirect("/stores/$store->hashid");
         return redirect('/all');
     }
+
+    public function delete(Item $item)
+    {
+        $storeHash = request('store_id');
+        //store selections replace to auth user
+
+        $item->store_id = Store::skip(1)->first()->id;
+        $item->save();
+        return redirect("/stores/$storeHash");
+    }
 }

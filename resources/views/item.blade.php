@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="col-span-8">
-                    <div class="justify-between hidden mb-6 lg:flex">
+                    <div class="justify-between mb-6 lg:flex">
                         <a href="/stores/{{ $item->store->hashid }}"
                             class="relative inline-flex items-center text-lg transition-colors duration-300 hover:text-blue-500">
                             <svg width="22" height="22" viewBox="0 0 22 22" class="mr-2">
@@ -48,7 +48,9 @@
                     </h1>
 
                     <div class="space-y-4 leading-loose lg:text-lg">{{ $item->description }}</div>
+                    <x-item-actions :item="$item"/>
                 </div>
+
             </article>
 
 

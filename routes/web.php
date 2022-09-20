@@ -43,6 +43,7 @@ Route::get('item/{store}/create', [ItemController::class, 'create']);
 Route::get('/item/{item}', [ItemController::class, 'show']);
 Route::post('/item/store', [ItemController::class, 'store']);
 Route::post('/item/{store}/store', [ItemController::class, 'store']);
+Route::post('/item/{item}/delete', [ItemController::class, 'delete']);
 
 Route::get('/generate-qrcode/{store}', [QrCodeController::class, 'index']);
 
